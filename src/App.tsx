@@ -1,11 +1,13 @@
+import { Outlet } from "react-router-dom";
 import Navbar from "./components/ui/Navbar/Navbar";
-import TopBanner from "./components/ui/TopBanner/TopBanner";
+import Footer from "./components/ui/Footer/Footer";
 
 const App = () => {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="md:max-w-7xl mx-auto">
       <Navbar></Navbar>
-      <TopBanner></TopBanner>
+      <Outlet></Outlet>
+      <Footer></Footer>
     </div>
   );
 };

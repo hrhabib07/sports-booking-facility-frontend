@@ -11,10 +11,10 @@ const TopBanner = () => {
   ];
 
   return (
-    <div className="bg-blue-50">
+    <div className="bg-blue-50 w-full">
       <div className="h-auto md:h-[500px] flex flex-col-reverse md:flex-row gap-4 justify-between items-center">
-        <div className="flex-1 flex flex-col justify-center items-center">
-          <div>
+        <div className="flex-1 flex w-full flex-col justify-center items-center">
+          <div className="mx-4">
             <h2 className="text-4xl text-custom-blue my-2">
               Welcome to sportLine
             </h2>
