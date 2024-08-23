@@ -29,7 +29,7 @@ const TopBanner = () => {
         </div>
         <div className="flex-1 flex justify-center items-center h-80 w-80">
           <div className="w-80">
-            <Carousel autoplay={true} fade={true}>
+            <Carousel autoplay={true} fade={true} autoplaySpeed={1000}>
               {images.map((src, index) => (
                 <div key={index}>
                   <img
