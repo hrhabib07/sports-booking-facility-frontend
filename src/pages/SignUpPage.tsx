@@ -1,10 +1,12 @@
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserSignUpMutation } from "../redux/auth/authApi";
 import { toast, Toaster } from "sonner";
 
 const SignUpPage = () => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+
   const [userSignUp, { data, error }] = useUserSignUpMutation();
   console.log("data =>", data);
   if (error) {
@@ -21,6 +23,7 @@ const SignUpPage = () => {
       const response = await userSignUp(registerUserData);
       if (response?.data?.success) {
         toast.success("user created successfully", { id: toastId });
+        navigate("/login");
       } else {
         toast.error("something went wrong", { id: toastId });
       }

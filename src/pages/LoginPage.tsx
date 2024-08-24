@@ -4,11 +4,13 @@ import { TLoginUserData } from "../types/auth.type";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: "userhabib@123.com",
@@ -26,6 +28,10 @@ const LoginPage = () => {
       const res = await login(userData).unwrap();
       if (res?.success) {
         toast.success("you have logged in successfully", { id: toastId });
+        dispatch(setUser({ user: res.data, token: res.token }));
+        const verifiedToken = verifyToken(res.token);
+        console.log(verifiedToken);
+        navigate("/");
       } else {
         toast.error(`{"something went wrong"}`, { id: toastId });
       }
@@ -33,9 +39,6 @@ const LoginPage = () => {
       toast.error("something went wrong", { id: toastId });
       console.log(error);
     }
-    dispatch(setUser({ user: res.data, token: res.token }));
-    const verifiedToken = verifyToken(res.token);
-    console.log(verifiedToken);
   };
   return (
     <div className="w-full h-screen flex justify-center items-center">
