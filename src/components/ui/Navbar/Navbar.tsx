@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { logout } from "../../../redux/auth/authSlice";
+import { toast, Toaster } from "sonner";
 
 const Navbar = () => {
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("user logged out successfully");
+  };
 
   return (
     <div className="bg-blue-50">
+      <Toaster></Toaster>
       <div className="h-16   flex justify-between items-center">
         <div className="flex items-center ml-4">
           <img
@@ -41,7 +47,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <button
-                onClick={() => dispatch(logout())}
+                onClick={handleLogout}
                 className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent   hover:border-custom-blue"
               >
                 <span className="flex gap-1 items-center">
