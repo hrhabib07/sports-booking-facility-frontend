@@ -5,6 +5,8 @@ import LoginPage from "../pages/LoginPage";
 import ContactPage from "../pages/ContactPage";
 import BookingPage from "../pages/BookingPage";
 import HomePage from "../pages/HomePage";
+import PrivateRoute from "../auth/PrivateRoute";
+import BookingConfirmationPage from "../pages/BookingConfirmationPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "home",
         element: <HomePage />,
+      },
+      {
+        path: "confirm-booking",
+        element: (
+          <PrivateRoute>
+            <BookingConfirmationPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "booking",

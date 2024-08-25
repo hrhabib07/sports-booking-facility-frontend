@@ -1,4 +1,5 @@
 import { Carousel } from "antd";
+import { Link } from "react-router-dom";
 
 const TopBanner = () => {
   const images = [
@@ -22,9 +23,11 @@ const TopBanner = () => {
               The ultimate solution for booking sports facilities <br /> in the
               simplest way
             </p>
-            <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
-              Explore more
-            </button>
+            <Link to={"/booking"}>
+              <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
+                Book Now
+              </button>
+            </Link>
           </div>
         </div>
         <div className="flex-1 flex justify-center items-center h-80 w-80">

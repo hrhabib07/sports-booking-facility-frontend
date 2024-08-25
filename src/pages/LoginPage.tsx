@@ -4,12 +4,16 @@ import { TLoginUserData } from "../types/auth.type";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+  const slotData = location.state?.slotData || {}; // Extract the data passed
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -31,7 +35,7 @@ const LoginPage = () => {
         dispatch(setUser({ user: res.data, token: res.token }));
         const verifiedToken = verifyToken(res.token);
         console.log(verifiedToken);
-        navigate("/");
+        navigate(from, { replace: true, state: { ...slotData } });
       } else {
         toast.error(`{"something went wrong"}`, { id: toastId });
       }

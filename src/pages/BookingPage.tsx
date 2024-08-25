@@ -3,6 +3,7 @@ import { useGetAllFacilitiesQuery } from "../redux/facilities/facilitiesApi";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 import { useGetAvailableBookingQuery } from "../redux/booking/userBookingApi";
+import { Link } from "react-router-dom";
 
 const BookingPage = () => {
   const [selectedFacility, setSelectedFacility] = useState("");
@@ -107,11 +108,11 @@ const BookingPage = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
         <div className="flex flex-col gap-4">
           <Space className="">
             <div className="flex flex-col">
-              <label htmlFor="facility">Select a facility</label>
+              <label htmlFor="facility">Indoor stadium name</label>
               <Select
                 id="facility"
                 defaultValue="select a facility "
@@ -123,7 +124,7 @@ const BookingPage = () => {
           </Space>
           <Space className="">
             <div className="flex flex-col">
-              <label htmlFor="facility">Select a facility</label>
+              <label htmlFor="facility">Pick a date</label>
               <DatePicker
                 className="w-80"
                 onChange={onChangeDate}
@@ -132,37 +133,46 @@ const BookingPage = () => {
             </div>
           </Space>
         </div>
-        <div>
-          <p>Available slots</p>
-          <div className="grid grid-cols-3 gap-4">
-            {filteredSlots.map((slot, index) => (
-              <Button
-                key={index}
-                type={selectedSlot === slot ? "primary" : "default"}
-                onClick={() => handleSelectSlot(slot)}
-                className="text-center p-4 text-custom-blue"
+        <div className="p-4">
+          {availableSlots.length ? (
+            <p className=" my-2"> Please select a Slot </p>
+          ) : (
+            <p className="text-red-400 my-2">
+              {" "}
+              Please select a date and a name of indoor stadium first{" "}
+            </p>
+          )}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {allSlots.map((slot, index) => (
+              <Link
+                to={"/confirm-booking"}
+                state={{
+                  selectedDate,
+                  selectedFacility,
+                  startTime: slot.startTime,
+                  endTime: slot.endTime,
+                }}
               >
-                {`${convertTo12HourFormat(
-                  slot.startTime
-                )} - ${convertTo12HourFormat(slot.endTime)}`}
-              </Button>
+                <Button
+                  key={index}
+                  type={selectedSlot === slot ? "primary" : "default"}
+                  onClick={() => handleSelectSlot(slot)}
+                  className="text-center p-4 text-custom-blue"
+                  disabled={
+                    !filteredSlots.some(
+                      (filteredSlot) =>
+                        filteredSlot.startTime === slot.startTime &&
+                        filteredSlot.endTime === slot.endTime
+                    )
+                  }
+                >
+                  {`${convertTo12HourFormat(
+                    slot.startTime
+                  )} - ${convertTo12HourFormat(slot.endTime)}`}
+                </Button>
+              </Link>
             ))}
           </div>
-          {/* <div className="grid grid-cols-3 gap-4">
-            {allSlots.map((slot, index) => (
-              <Button
-                key={index}
-                type={selectedSlot === slot ? "primary" : "default"}
-                onClick={() => handleSelectSlot(slot)}
-                className="text-center p-4 text-custom-blue "
-                disabled
-              >
-                {`${convertTo12HourFormat(
-                  slot.startTime
-                )} - ${convertTo12HourFormat(slot.endTime)}`}
-              </Button>
-            ))}
-          </div> */}
         </div>
       </div>
     </div>
