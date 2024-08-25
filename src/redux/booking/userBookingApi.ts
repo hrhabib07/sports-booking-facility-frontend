@@ -8,6 +8,12 @@ const userBookingApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getAvailableBooking: builder.query({
+      query: (args) => ({
+        url: `/check-availability?date=${args.date}&facility=${args.facility}`,
+        method: "GET",
+      }),
+    }),
     cancelBooking: builder.mutation({
       query: (bookingId: string) => ({
         url: `/bookings/${bookingId}`,
@@ -17,5 +23,8 @@ const userBookingApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetMyBookingQuery, useCancelBookingMutation } =
-  userBookingApi;
+export const {
+  useGetMyBookingQuery,
+  useCancelBookingMutation,
+  useGetAvailableBookingQuery,
+} = userBookingApi;
