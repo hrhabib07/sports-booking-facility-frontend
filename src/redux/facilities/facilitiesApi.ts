@@ -9,6 +9,13 @@ const facilitiesApi = baseApi.injectEndpoints({
         // body: userInfo,
       }),
     }),
+    getSingleFacility: builder.query({
+      query: (facilityId) => ({
+        url: `/facility/${facilityId}`,
+        method: "GET",
+        // body: userInfo,
+      }),
+    }),
     // userSignUp: builder.mutation({
     //   query: (userInfo) => ({
     //     url: "/auth/signup",
@@ -19,4 +26,5 @@ const facilitiesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllFacilitiesQuery } = facilitiesApi;
+export const { useGetAllFacilitiesQuery, useGetSingleFacilityQuery } =
+  facilitiesApi;
