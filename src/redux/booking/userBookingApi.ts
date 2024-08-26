@@ -7,12 +7,14 @@ const userBookingApi = baseApi.injectEndpoints({
         url: "/bookings/user",
         method: "GET",
       }),
+      providesTags: ["my-booking"],
     }),
     getAvailableBooking: builder.query({
       query: (args) => ({
         url: `/check-availability?date=${args.date}&facility=${args.facility}`,
         method: "GET",
       }),
+      providesTags: ["confirmed-booking"],
     }),
     confirmBooking: builder.mutation({
       query: (data) => ({
@@ -20,12 +22,14 @@ const userBookingApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["confirmed-booking"],
     }),
     cancelBooking: builder.mutation({
       query: (bookingId: string) => ({
         url: `/bookings/${bookingId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["my-booking", "confirmed-booking"],
     }),
   }),
 });

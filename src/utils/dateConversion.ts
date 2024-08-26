@@ -24,5 +24,5 @@ export function convertDateToCustomFormat(dateString: string): string {
   const year = date.getFullYear().toString().slice(-2); // Get the last two digits of the year
 
   // Return the formatted date string
-  return `${day}${month}${year}`;
+  return `${day} ${month} ${year}`;
 }
