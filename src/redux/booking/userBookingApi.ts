@@ -14,6 +14,13 @@ const userBookingApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    confirmBooking: builder.mutation({
+      query: (data) => ({
+        url: "/bookings",
+        method: "POST",
+        body: data,
+      }),
+    }),
     cancelBooking: builder.mutation({
       query: (bookingId: string) => ({
         url: `/bookings/${bookingId}`,
@@ -27,4 +34,5 @@ export const {
   useGetMyBookingQuery,
   useCancelBookingMutation,
   useGetAvailableBookingQuery,
+  useConfirmBookingMutation,
 } = userBookingApi;

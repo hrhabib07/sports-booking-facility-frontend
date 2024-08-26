@@ -1,13 +1,26 @@
 import { Button, DatePicker, Select, Space } from "antd";
 import { useGetAllFacilitiesQuery } from "../redux/facilities/facilitiesApi";
 import dayjs, { Dayjs } from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAvailableBookingQuery } from "../redux/booking/userBookingApi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const BookingPage = () => {
   const [selectedFacility, setSelectedFacility] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
+
+  const location = useLocation();
+  const {
+    selectedDate: previousSelectedDate,
+    selectedFacility: previousSelectedFacility,
+  } = location.state || {};
+  console.log(previousSelectedDate, previousSelectedFacility);
+  useEffect(() => {
+    if (previousSelectedDate && previousSelectedFacility) {
+      setSelectedDate(previousSelectedDate);
+      setSelectedFacility(previousSelectedFacility);
+    }
+  }, [previousSelectedDate, previousSelectedFacility]);
 
   // facility options
   const { data } = useGetAllFacilitiesQuery(undefined);
@@ -115,10 +128,12 @@ const BookingPage = () => {
               <label htmlFor="facility">Indoor stadium name</label>
               <Select
                 id="facility"
+                value={selectedFacility}
                 defaultValue="select a facility "
                 className="w-80"
                 onChange={handleChangeFacility}
                 options={facilitiesOptions}
+                disabled={!!previousSelectedDate && !!previousSelectedFacility}
               />
             </div>
           </Space>
@@ -127,8 +142,10 @@ const BookingPage = () => {
               <label htmlFor="facility">Pick a date</label>
               <DatePicker
                 className="w-80"
+                value={selectedDate ? dayjs(selectedDate) : null}
                 onChange={onChangeDate}
                 disabledDate={disabledDate}
+                disabled={!!previousSelectedDate && !!previousSelectedFacility}
               />
             </div>
           </Space>
