@@ -5,7 +5,7 @@ import { logout } from "../../../redux/auth/authSlice";
 import { toast, Toaster } from "sonner";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
-const Navbar = () => {
+const DummyNavbar = () => {
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -176,4 +176,76 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DummyNavbar;
+
+// import { Link } from "react-router-dom";
+// import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+// import { logout } from "../../../redux/auth/authSlice";
+// import { toast, Toaster } from "sonner";
+// import { useState } from "react";
+
+// const Navbar = () => {
+//   const auth = useAppSelector((state) => state.auth);
+//   const dispatch = useAppDispatch();
+//   const handleLogout = () => {
+//     dispatch(logout());
+//     toast.success("user logged out successfully");
+//   };
+
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+//   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+//   const toggleMobileMenu = () => {
+//     setIsMobileMenuOpen(!isMobileMenuOpen);
+//   };
+
+//   const toggleProfileDropdown = () => {
+//     setIsProfileDropdownOpen(!isProfileDropdownOpen);
+//   };
+
+//   return (
+//     <div className="bg-blue-50">
+//       <Toaster></Toaster>
+//       <div className="h-16   flex justify-between items-center">
+//         <div className="flex items-center ml-4">
+//           <img
+//             src="https://i.ibb.co/0KCLL9m/sport-Line-without-bg.png"
+//             alt="Logo"
+//             style={{ width: "50px", height: "50px" }} // Adjust the size as needed
+//           />
+//         </div>
+//         <div>
+//           <ul className="flex gap-4 me-4">
+//             <Link to={""}>
+//               <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent   hover:border-custom-blue">
+//                 Home
+//               </li>
+//             </Link>
+//             <Link to={"booking"}>
+//               <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent   hover:border-custom-blue">
+//                 Booking
+//               </li>
+//             </Link>
+//             <Link to={"contact"}>
+//               <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent   hover:border-custom-blue">
+//                 Contact
+//               </li>
+//             </Link>
+//             {!auth.token ? (
+//               <Link to={"login"}>
+//                 <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent   hover:border-custom-blue">
+//                   Login
+//                 </li>
+//               </Link>
+//             ) : (
+//               <div>
+//                 <h2>My Profile </h2>
+//               </div>
+//             )}
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Navbar;

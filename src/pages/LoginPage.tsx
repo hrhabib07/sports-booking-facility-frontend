@@ -3,7 +3,6 @@ import { useLoginMutation } from "../redux/auth/authApi";
 import { TLoginUserData } from "../types/auth.type";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/auth/authSlice";
-import { verifyToken } from "../utils/verifyToken";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
 
@@ -13,8 +12,8 @@ const LoginPage = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  const slotData = location.state.from.state || {}; // Extract the data passed
-  console.log(slotData);
+  const slotData = location?.state?.from?.state || {}; // Extract the data passed
+  // console.log(slotData);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -34,8 +33,8 @@ const LoginPage = () => {
       if (res?.success) {
         toast.success("you have logged in successfully", { id: toastId });
         dispatch(setUser({ user: res.data, token: res.token }));
-        const verifiedToken = verifyToken(res.token);
-        console.log(verifiedToken);
+        // const verifiedToken = verifyToken(res.token);
+        // console.log(verifiedToken);
         navigate(from, { replace: true, state: { ...slotData } });
       } else {
         toast.error(`{"something went wrong"}`, { id: toastId });
