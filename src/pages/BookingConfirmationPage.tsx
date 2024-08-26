@@ -4,6 +4,7 @@ const BookingConfirmationPage = () => {
   const location = useLocation();
   const { selectedDate, selectedFacility, startTime, endTime } =
     location.state || {};
+
   //   console.log(selectedSlot, selectedFacility);
   return (
     <div>

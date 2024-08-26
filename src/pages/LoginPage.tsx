@@ -13,7 +13,8 @@ const LoginPage = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  const slotData = location.state?.slotData || {}; // Extract the data passed
+  const slotData = location.state.from.state || {}; // Extract the data passed
+  console.log(slotData);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
