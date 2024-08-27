@@ -14,6 +14,7 @@ import ProfileInfo from "../components/ui/Dashboard/ProfileInfo/ProfileInfo";
 import DashBoardHome from "../components/ui/Dashboard/DashBoardHome/DashBoardHome";
 import FacilityListPage from "../pages/FacilityListPage";
 import FacilityDetailsPage from "../pages/FacilityDetailsPage";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
       },
     ],
+  },
+  {
+    path: "*", // Catch-all route for undefined paths
+    element: <ErrorPage />, // Display the ErrorPage for 404 errors
   },
 ]);
 
