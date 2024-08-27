@@ -5,6 +5,7 @@ import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/auth/authSlice";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, Toaster } from "sonner";
+import { verifyToken } from "../utils/verifyToken";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
@@ -32,9 +33,17 @@ const LoginPage = () => {
       const res = await login(userData).unwrap();
       if (res?.success) {
         toast.success("you have logged in successfully", { id: toastId });
-        dispatch(setUser({ user: res.data, token: res.token }));
-        // const verifiedToken = verifyToken(res.token);
-        // console.log(verifiedToken);
+
+        const verifiedToken = verifyToken(res.token);
+        if (verifiedToken) {
+          dispatch(
+            setUser({
+              user: { ...res.data, role: verifiedToken?.role },
+              token: res.token,
+            })
+          );
+        }
+
         navigate(from, { replace: true, state: { ...slotData } });
       } else {
         toast.error(`{"something went wrong"}`, { id: toastId });
@@ -44,6 +53,24 @@ const LoginPage = () => {
       console.log(error);
     }
   };
+  // const onSubmit = async (userData: TLoginUserData) => {
+  //   const toastId = toast.loading("logging in...");
+  //   try {
+  //     const res = await login(userData).unwrap();
+  //     if (res?.success) {
+  //       toast.success("you have logged in successfully", { id: toastId });
+  //       dispatch(setUser({ user: res.data, token: res.token }));
+  //       // const verifiedToken = verifyToken(res.token);
+  //       // console.log(verifiedToken);
+  //       navigate(from, { replace: true, state: { ...slotData } });
+  //     } else {
+  //       toast.error(`{"something went wrong"}`, { id: toastId });
+  //     }
+  //   } catch (error) {
+  //     toast.error("something went wrong", { id: toastId });
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Toaster />

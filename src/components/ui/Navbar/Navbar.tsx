@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { verifyToken } from "../../../utils/verifyToken";
 
 const Navbar = () => {
   const auth = useAppSelector((state) => state.auth);
+  const verifiedToken = verifyToken(auth?.token);
+  const userRole = verifiedToken?.role;
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -50,11 +54,21 @@ const Navbar = () => {
               </li>
             </Link>
           ) : (
-            <Link to={"/user-dashboard"}>
-              <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
-                Dashboard
-              </li>
-            </Link>
+            <div>
+              {userRole === "user" ? (
+                <Link to={"/user-dashboard"}>
+                  <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                    Dashboard
+                  </li>
+                </Link>
+              ) : (
+                <Link to={"/admin-dashboard"}>
+                  <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                    Dashboard
+                  </li>
+                </Link>
+              )}
+            </div>
           )}
         </div>
 

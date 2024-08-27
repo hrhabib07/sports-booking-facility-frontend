@@ -1,6 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 
 export const verifyToken = (token: string) => {
-  const decoded = jwtDecode(token);
-  return decoded;
+  try {
+    const decodedToken = jwtDecode<{ role: string }>(token);
+    return decodedToken;
+  } catch (error) {
+    console.error("Invalid token:", error);
+    return null;
+  }
 };

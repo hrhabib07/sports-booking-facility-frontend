@@ -15,6 +15,8 @@ import DashBoardHome from "../components/ui/Dashboard/DashBoardHome/DashBoardHom
 import FacilityListPage from "../pages/FacilityListPage";
 import FacilityDetailsPage from "../pages/FacilityDetailsPage";
 import ErrorPage from "../pages/ErrorPage";
+import RoleBasedRoute from "../auth/RoleBasedRoute";
+import AdminDashboard from "../components/ui/Dashboard/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -58,8 +60,34 @@ const router = createBrowserRouter([
         element: <MyBookings />,
       },
       {
+        path: "admin-dashboard",
+        element: (
+          <RoleBasedRoute requiredRole="admin">
+            <AdminDashboard />
+          </RoleBasedRoute>
+        ),
+        children: [
+          {
+            path: "",
+            element: <DashBoardHome />,
+          },
+          {
+            path: "my-booking",
+            element: <MyBookings />,
+          },
+          {
+            path: "profile-info",
+            element: <ProfileInfo />,
+          },
+        ],
+      },
+      {
         path: "user-dashboard",
-        element: <UserDashboard />,
+        element: (
+          <RoleBasedRoute requiredRole="user">
+            <UserDashboard />
+          </RoleBasedRoute>
+        ),
         children: [
           {
             path: "",
