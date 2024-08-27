@@ -12,6 +12,7 @@ import MyBookings from "../components/ui/MyBookings/MyBookings";
 import UserDashboard from "../components/ui/Dashboard/UserDashboard";
 import ProfileInfo from "../components/ui/Dashboard/ProfileInfo/ProfileInfo";
 import DashBoardHome from "../components/ui/Dashboard/DashBoardHome/DashBoardHome";
+import FacilityListPage from "../pages/FacilityListPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "booking",
         element: <BookingPage />,
+      },
+      {
+        path: "facility-list",
+        element: <FacilityListPage />,
       },
       {
         path: "successful-booking",

@@ -1,32 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { logout } from "../../../redux/auth/authSlice";
-import { toast, Toaster } from "sonner";
+import { useAppSelector } from "../../../redux/hooks";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
   const auth = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-
-  const handleLogout = () => {
-    dispatch(logout());
-    toast.success("User logged out successfully");
-  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const toggleProfileDropdown = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-  };
-
   return (
     <div className="bg-blue-50">
-      <Toaster />
       <div className="h-16 flex justify-between items-center px-4 md:px-8">
         <div className="flex items-center">
           <img
@@ -38,26 +24,22 @@ const Navbar = () => {
 
         <div className="hidden md:flex gap-4 list-none">
           <Link to="/">
-            <li
-              onClick={() => setIsProfileDropdownOpen(false)}
-              className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue"
-            >
+            <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
               Home
             </li>
           </Link>
           <Link to="/booking">
-            <li
-              onClick={() => setIsProfileDropdownOpen(false)}
-              className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue"
-            >
+            <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
               Booking
             </li>
           </Link>
+          <Link to="/facility-list">
+            <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+              See All Facility
+            </li>
+          </Link>
           <Link to="/contact">
-            <li
-              onClick={() => setIsProfileDropdownOpen(false)}
-              className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue"
-            >
+            <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
               Contact
             </li>
           </Link>
