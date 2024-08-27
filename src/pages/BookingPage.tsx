@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 import { Button, DatePicker, Select, Space } from "antd";
 import { useGetAllFacilitiesQuery } from "../redux/facilities/facilitiesApi";
 import dayjs, { Dayjs } from "dayjs";
@@ -6,21 +8,28 @@ import { useGetAvailableBookingQuery } from "../redux/booking/userBookingApi";
 import { Link, useLocation } from "react-router-dom";
 
 const BookingPage = () => {
-  const [selectedFacility, setSelectedFacility] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedFacility, setSelectedFacility] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
   const location = useLocation();
   const {
     selectedDate: previousSelectedDate,
     selectedFacility: previousSelectedFacility,
+    facilityId: selectedFacilityFromFacilityDetailsPage,
   } = location.state || {};
-  console.log(previousSelectedDate, previousSelectedFacility);
+
   useEffect(() => {
     if (previousSelectedDate && previousSelectedFacility) {
       setSelectedDate(previousSelectedDate);
       setSelectedFacility(previousSelectedFacility);
+    } else if (selectedFacilityFromFacilityDetailsPage) {
+      setSelectedFacility(selectedFacilityFromFacilityDetailsPage);
     }
-  }, [previousSelectedDate, previousSelectedFacility]);
+  }, [
+    previousSelectedDate,
+    previousSelectedFacility,
+    selectedFacilityFromFacilityDetailsPage,
+  ]);
 
   // facility options
   const { data } = useGetAllFacilitiesQuery(undefined);
@@ -42,15 +51,11 @@ const BookingPage = () => {
   };
 
   // Handle date selection
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onChangeDate = (date: Dayjs | null, _dateString: string | string[]) => {
     if (date) {
       const formattedDate = date.format("YYYY-MM-DD");
-      setSelectedDate(formattedDate); // This will give you the date in YYYY-MM-DD format
+      setSelectedDate(formattedDate);
     }
-    // else {
-    //   console.log("No date selected");
-    // }
   };
 
   // Fetch available slots when both date and facility are selected
@@ -59,19 +64,14 @@ const BookingPage = () => {
       ? { date: selectedDate, facility: selectedFacility }
       : undefined,
     {
-      skip: !selectedDate || !selectedFacility, // Skip query if either is missing
+      skip: !selectedDate || !selectedFacility,
     }
   );
 
-  // const availableSlots = slotData?.data;
-  // console.log("slot data", availableSlots); // will return an array like this :  [{startTime: "00:00", endTime: "01:00"}, {startTime: "01:00", endTime: "02:00"},…]
-  // // I want to show only availableSlots !disabled in my frontend
-
   const convertTo12HourFormat = (time: string): string => {
-    // eslint-disable-next-line prefer-const
     let [hour, minute] = time.split(":").map(Number);
     const period = hour >= 12 ? "PM" : "AM";
-    hour = hour % 12 || 12; // Convert 0 to 12 for midnight and handle 12-hour format
+    hour = hour % 12 || 12;
     return `${hour}:${minute.toString().padStart(2, "0")} ${period}`;
   };
 
@@ -102,9 +102,7 @@ const BookingPage = () => {
     { startTime: "22:00", endTime: "23:00" },
     { startTime: "23:00", endTime: "24:00" },
   ];
-  const availableSlots = slotData?.data || []; // Use an empty array if no data
-  console.log(selectedFacility);
-  console.log(availableSlots);
+  const availableSlots = slotData?.data || [];
 
   // Filter allSlots to only include those available in availableSlots
   const filteredSlots = allSlots.filter((slot) =>
@@ -116,80 +114,76 @@ const BookingPage = () => {
   );
   const handleSelectSlot = (slot: { startTime: string; endTime: string }) => {
     setSelectedSlot(slot);
-    console.log(slot); // This will output the selected slot in 24-hour format
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-        <div className="flex flex-col gap-4">
-          <Space className="">
-            <div className="flex flex-col">
-              <label htmlFor="facility">Indoor stadium name</label>
-              <Select
-                id="facility"
-                value={selectedFacility}
-                defaultValue="select a facility "
-                className="w-80"
-                onChange={handleChangeFacility}
-                options={facilitiesOptions}
-                disabled={!!previousSelectedDate && !!previousSelectedFacility}
-              />
-            </div>
-          </Space>
-          <Space className="">
-            <div className="flex flex-col">
-              <label htmlFor="facility">Pick a date</label>
-              <DatePicker
-                className="w-80"
-                value={selectedDate ? dayjs(selectedDate) : null}
-                onChange={onChangeDate}
-                disabledDate={disabledDate}
-                disabled={!!previousSelectedDate && !!previousSelectedFacility}
-              />
-            </div>
-          </Space>
-        </div>
-        <div className="p-4">
-          {availableSlots.length ? (
-            <p className=" my-2"> Please select a Slot </p>
-          ) : (
-            <p className="text-red-400 my-2">
-              {" "}
-              Please select a date and a name of indoor stadium first{" "}
-            </p>
-          )}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {allSlots.map((slot, index) => (
-              <Link
-                to={"/confirm-booking"}
-                state={{
-                  selectedDate,
-                  selectedFacility,
-                  startTime: slot.startTime,
-                  endTime: slot.endTime,
-                }}
-              >
-                <Button
-                  key={index}
-                  type={selectedSlot === slot ? "primary" : "default"}
-                  onClick={() => handleSelectSlot(slot)}
-                  className="text-center p-4 text-custom-blue"
-                  disabled={
-                    !filteredSlots.some(
-                      (filteredSlot) =>
-                        filteredSlot.startTime === slot.startTime &&
-                        filteredSlot.endTime === slot.endTime
-                    )
-                  }
-                >
-                  {`${convertTo12HourFormat(
-                    slot.startTime
-                  )} - ${convertTo12HourFormat(slot.endTime)}`}
-                </Button>
-              </Link>
-            ))}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+      <div className="flex flex-col gap-4">
+        <Space>
+          <div className="flex flex-col">
+            <label htmlFor="facility">Indoor stadium name</label>
+            <Select
+              id="facility"
+              value={selectedFacility}
+              className="w-80"
+              onChange={handleChangeFacility}
+              options={facilitiesOptions}
+              disabled={!!previousSelectedDate && !!previousSelectedFacility}
+            />
           </div>
+        </Space>
+        <Space>
+          <div className="flex flex-col">
+            <label htmlFor="date">Pick a date</label>
+            <DatePicker
+              id="date"
+              className="w-80"
+              value={selectedDate ? dayjs(selectedDate) : null}
+              onChange={onChangeDate}
+              disabledDate={disabledDate}
+              disabled={!!previousSelectedDate && !!previousSelectedFacility}
+            />
+          </div>
+        </Space>
+      </div>
+      <div className="p-4">
+        {availableSlots.length ? (
+          <p className="my-2"> Please select a Slot </p>
+        ) : (
+          <p className="text-red-400 my-2">
+            Please select a date and a name of indoor stadium first
+          </p>
+        )}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {allSlots.map((slot, index) => (
+            <Link
+              key={index}
+              to="/confirm-booking"
+              state={{
+                selectedDate,
+                selectedFacility,
+                startTime: slot.startTime,
+                endTime: slot.endTime,
+              }}
+            >
+              <Button
+                type={selectedSlot === slot ? "primary" : "default"}
+                onClick={() => handleSelectSlot(slot)}
+                className="text-center p-4 text-custom-blue"
+                disabled={
+                  !filteredSlots.some(
+                    (filteredSlot) =>
+                      filteredSlot.startTime === slot.startTime &&
+                      filteredSlot.endTime === slot.endTime
+                  )
+                }
+              >
+                {`${convertTo12HourFormat(
+                  slot.startTime
+                )} - ${convertTo12HourFormat(slot.endTime)}`}
+              </Button>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
