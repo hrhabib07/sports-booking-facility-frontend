@@ -17,6 +17,7 @@ import FacilityDetailsPage from "../pages/FacilityDetailsPage";
 import ErrorPage from "../pages/ErrorPage";
 import RoleBasedRoute from "../auth/RoleBasedRoute";
 import AdminDashboard from "../components/ui/Dashboard/AdminDashboard";
+import AllBooking from "../components/ui/Dashboard/AllBooking";
 
 const router = createBrowserRouter([
   {
@@ -72,8 +73,8 @@ const router = createBrowserRouter([
             element: <DashBoardHome />,
           },
           {
-            path: "my-booking",
-            element: <MyBookings />,
+            path: "all-booking",
+            element: <AllBooking />,
           },
           {
             path: "profile-info",
