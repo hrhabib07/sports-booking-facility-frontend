@@ -9,6 +9,9 @@ import PrivateRoute from "../auth/PrivateRoute";
 import BookingConfirmationPage from "../pages/BookingConfirmationPage";
 import SuccessfulBooking from "../pages/SuccessfulBooking";
 import MyBookings from "../components/ui/MyBookings/MyBookings";
+import UserDashboard from "../components/ui/Dashboard/UserDashboard";
+import ProfileInfo from "../components/ui/Dashboard/ProfileInfo/ProfileInfo";
+import DashBoardHome from "../components/ui/Dashboard/DashBoardHome/DashBoardHome";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +45,24 @@ const router = createBrowserRouter([
       {
         path: "my-booking",
         element: <MyBookings />,
+      },
+      {
+        path: "user-dashboard",
+        element: <UserDashboard />,
+        children: [
+          {
+            path: "",
+            element: <DashBoardHome />,
+          },
+          {
+            path: "my-booking",
+            element: <MyBookings />,
+          },
+          {
+            path: "profile-info",
+            element: <ProfileInfo />,
+          },
+        ],
       },
       {
         path: "contact",

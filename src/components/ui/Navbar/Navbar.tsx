@@ -68,34 +68,11 @@ const Navbar = () => {
               </li>
             </Link>
           ) : (
-            <div className="relative z-10">
-              <li
-                className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue"
-                onClick={toggleProfileDropdown}
-              >
-                My Profile
+            <Link to={"/user-dashboard"}>
+              <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                Dashboard
               </li>
-              {isProfileDropdownOpen && (
-                <div className="absolute right-0 mt-2 py-2 w-48 bg-white border rounded shadow-xl">
-                  <Link to="/my-booking">
-                    <li className="px-4 py-2 text-gray-500 hover:bg-blue-50 hover:text-custom-blue">
-                      My Booking
-                    </li>
-                  </Link>
-                  <Link to="/profile-info">
-                    <li className="px-4 py-2 text-gray-500 hover:bg-blue-50 hover:text-custom-blue">
-                      Profile Info
-                    </li>
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-gray-500 hover:bg-blue-50 hover:text-custom-blue"
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
+            </Link>
           )}
         </div>
 
@@ -137,37 +114,11 @@ const Navbar = () => {
                 </li>
               </Link>
             ) : (
-              <div>
-                <li
-                  className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue"
-                  onClick={toggleProfileDropdown}
-                >
-                  My Profile
+              <Link to={"/user-dashboard"} onClick={toggleMobileMenu}>
+                <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                  Dashboard
                 </li>
-                {isProfileDropdownOpen && (
-                  <ul className="flex flex-col gap-2 mt-2 pl-4">
-                    <Link to="/my-booking" onClick={toggleMobileMenu}>
-                      <li className="text-gray-500 hover:bg-blue-50 hover:text-custom-blue">
-                        My Booking
-                      </li>
-                    </Link>
-                    <Link to="/profile-info" onClick={toggleMobileMenu}>
-                      <li className="text-gray-500 hover:bg-blue-50 hover:text-custom-blue">
-                        Profile Info
-                      </li>
-                    </Link>
-                    <button
-                      onClick={() => {
-                        handleLogout();
-                        toggleMobileMenu();
-                      }}
-                      className="text-left text-gray-500 hover:bg-blue-50 hover:text-custom-blue"
-                    >
-                      Logout
-                    </button>
-                  </ul>
-                )}
-              </div>
+              </Link>
             )}
           </ul>
         </div>

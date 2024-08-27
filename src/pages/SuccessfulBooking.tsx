@@ -24,7 +24,7 @@ const SuccessfulBooking = () => {
             </Button>
           </Link>
           <Button className="w-full bg-custom-blue text-white p-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue transition-all duration-300">
-            <Link to={"/my-booking"}>Show My Booking</Link>
+            <Link to={"/user-dashboard/my-booking"}>Show My Booking</Link>
           </Button>
         </div>
       </div>
