@@ -95,11 +95,20 @@ const Navbar = () => {
                 Home
               </li>
             </Link>
-            <Link to="/booking" onClick={toggleMobileMenu}>
+
+            {userRole === "user" && (
+              <Link to="/booking" onClick={toggleMobileMenu}>
+                <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                  Booking
+                </li>
+              </Link>
+            )}
+            <Link to="/facility-list">
               <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
-                Booking
+                All Facility
               </li>
             </Link>
+
             <Link to="/contact" onClick={toggleMobileMenu}>
               <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
                 Contact

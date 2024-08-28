@@ -43,6 +43,20 @@ const UserDashboard = () => {
               </span>
             </Link>
           </Menu.Item>
+          <Menu.Item key="7">
+            <Link to="profile-info">
+              <span className="text-gray-600 hover:text-custom-blue">
+                Add Facility
+              </span>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="8">
+            <Link to="profile-info">
+              <span className="text-gray-600 hover:text-custom-blue">
+                Crate Admin
+              </span>
+            </Link>
+          </Menu.Item>
           <Menu.Item key="2">
             <Link to="profile-info">
               <span className="text-gray-600 hover:text-custom-blue">
@@ -73,9 +87,9 @@ const UserDashboard = () => {
                 </Link>
               </Menu.Item>
               <Menu.Item key="1">
-                <Link to="my-booking">
+                <Link to="all-booking">
                   <span className="text-gray-600 hover:text-custom-blue">
-                    My Booking
+                    All Booking
                   </span>
                 </Link>
               </Menu.Item>

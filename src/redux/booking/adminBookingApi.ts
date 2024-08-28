@@ -9,6 +9,20 @@ const adminBookingApi = baseApi.injectEndpoints({
       }),
       //   providesTags: ["my-booking"],
     }),
+    getSingleBooking: builder.query({
+      query: (id) => ({
+        url: `/bookings/${id}`,
+        method: "GET",
+      }),
+      //   providesTags: ["my-booking"],
+    }),
+    deleteBookingAdmin: builder.mutation({
+      query: (id) => ({
+        url: `/bookings/admin/${id}`,
+        method: "DELETE",
+      }),
+      //   providesTags: ["my-booking"],
+    }),
     // getAvailableBooking: builder.query({
     //   query: (args) => ({
     //     url: `/check-availability?date=${args.date}&facility=${args.facility}`,
@@ -34,4 +48,8 @@ const adminBookingApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllBookingsQuery } = adminBookingApi;
+export const {
+  useGetAllBookingsQuery,
+  useGetSingleBookingQuery,
+  useDeleteBookingAdminMutation,
+} = adminBookingApi;
