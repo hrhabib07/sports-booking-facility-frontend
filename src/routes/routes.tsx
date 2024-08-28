@@ -18,6 +18,7 @@ import ErrorPage from "../pages/ErrorPage";
 import RoleBasedRoute from "../auth/RoleBasedRoute";
 import AdminDashboard from "../components/ui/Dashboard/AdminDashboard";
 import AllBooking from "../components/ui/Dashboard/AllBooking";
+import AdminBookingDetails from "../components/ui/AdminBookingDetails";
 
 const router = createBrowserRouter([
   {
@@ -40,10 +41,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "booking",
-        element: <BookingPage />,
-      },
+
       {
         path: "facility-list",
         element: <FacilityListPage />,
@@ -57,9 +55,18 @@ const router = createBrowserRouter([
         element: <SuccessfulBooking />,
       },
       {
-        path: "my-booking",
-        element: <MyBookings />,
+        path: "booking",
+        element: (
+          <RoleBasedRoute requiredRole="user">
+            <BookingPage />
+          </RoleBasedRoute>
+        ),
       },
+      // {
+      //   path: "booking",
+      //   element: <BookingPage />,
+      // },
+
       {
         path: "admin-dashboard",
         element: (
@@ -71,6 +78,10 @@ const router = createBrowserRouter([
           {
             path: "",
             element: <DashBoardHome />,
+          },
+          {
+            path: "booking-details/:bookingId",
+            element: <AdminBookingDetails />,
           },
           {
             path: "all-booking",

@@ -7,6 +7,7 @@ import { useCancelBookingMutation } from "../../../redux/booking/userBookingApi"
 import { convertDateToCustomFormat } from "../../../utils/dateConversion";
 import { convertTo12HourFormat } from "../../../utils/timeConversion";
 import { useGetAllBookingsQuery } from "../../../redux/booking/adminBookingApi";
+import { Link } from "react-router-dom";
 
 // Define the type for the booking data
 type BookingRecord = {
@@ -79,9 +80,11 @@ const AllBooking = () => {
       key: "action",
       render: (record: BookingRecord) =>
         record.isBooked === "confirmed" && (
-          <Button type="primary" className="border p-3 rounded">
-            Details
-          </Button>
+          <Link to={`/admin-dashboard/booking-details/${record._id}`}>
+            <Button type="primary" className="border p-3 rounded">
+              Details
+            </Button>
+          </Link>
         ),
     },
   ];
