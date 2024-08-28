@@ -9,6 +9,27 @@ const facilitiesApi = baseApi.injectEndpoints({
         // body: userInfo,
       }),
     }),
+    createFacility: builder.mutation({
+      query: (facilityInfo) => ({
+        url: "/facility",
+        method: "POST",
+        body: facilityInfo,
+      }),
+    }),
+    updateFacility: builder.mutation({
+      query: (args) => ({
+        url: `/facility/${args.facilityId}`,
+        method: "PUT",
+        body: args.facilityData,
+      }),
+    }),
+    deleteFacility: builder.mutation({
+      query: (facilityId) => ({
+        url: `/facility/${facilityId}`,
+        method: "DELETE",
+        // body: facilityInfo,
+      }),
+    }),
     getSingleFacility: builder.query({
       query: (facilityId) => ({
         url: `/facility/${facilityId}`,
@@ -26,5 +47,10 @@ const facilitiesApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllFacilitiesQuery, useGetSingleFacilityQuery } =
-  facilitiesApi;
+export const {
+  useGetAllFacilitiesQuery,
+  useGetSingleFacilityQuery,
+  useCreateFacilityMutation,
+  useUpdateFacilityMutation,
+  useDeleteFacilityMutation,
+} = facilitiesApi;

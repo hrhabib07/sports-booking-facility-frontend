@@ -10,10 +10,15 @@ import {
 import { Input, Button, Card } from "antd";
 import { useGetAllFacilitiesQuery } from "../redux/facilities/facilitiesApi";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
+import { verifyToken } from "../utils/verifyToken";
 
 const { Search } = Input;
 
 const FacilityListPage = () => {
+  const auth = useAppSelector((state) => state.auth);
+  const verifiedToken = verifyToken(auth?.token as string);
+  const userRole = verifiedToken?.role;
   const { data } = useGetAllFacilitiesQuery(undefined);
   const facilities =
     data?.data.filter((facility: { isDeleted: any }) => !facility.isDeleted) ||
@@ -94,9 +99,16 @@ const FacilityListPage = () => {
               <p className="text-blue-600 font-semibold mb-4">
                 ${facility.pricePerHour} / hour
               </p>
-              <Link to={`/facility-details/${facility._id}`}>
-                <Button type="primary">View Details</Button>
-              </Link>
+              {userRole === "user" && (
+                <Link to={`/facility-details/${facility._id}`}>
+                  <Button type="primary">View Details</Button>
+                </Link>
+              )}
+              {userRole === "admin" && (
+                <Link to={`/admin-dashboard/${facility._id}`}>
+                  <Button type="primary">View Details</Button>
+                </Link>
+              )}
             </Card>
           )
         )}

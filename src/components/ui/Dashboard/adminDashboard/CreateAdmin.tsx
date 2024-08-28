@@ -3,7 +3,7 @@ import { toast, Toaster } from "sonner";
 import { useAdminSignUpMutation } from "../../../../redux/auth/authApi";
 
 const CreateAdmin = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [adminSignUp, { data, error }] = useAdminSignUpMutation();
   console.log("data =>", data);
@@ -19,9 +19,10 @@ const CreateAdmin = () => {
     };
     try {
       const response = await adminSignUp(registerUserData);
-      console.log("data.success", response.data?.success);
+      // console.log("data.success", response.data?.success);
       if (response.data?.success) {
         toast.success("Admin created successfully", { id: toastId });
+        reset();
       } else {
         toast.error("something went wrong", { id: toastId });
       }
