@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../redux/hooks";
-import { logout } from "../../../redux/auth/authSlice";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { logout } from "../../../../redux/auth/authSlice";
 import { toast } from "sonner";
 import { Menu, Layout } from "antd";
 
@@ -44,16 +44,16 @@ const UserDashboard = () => {
             </Link>
           </Menu.Item>
           <Menu.Item key="7">
-            <Link to="profile-info">
+            <Link to="create-facility">
               <span className="text-gray-600 hover:text-custom-blue">
-                Add Facility
+                Create Facility
               </span>
             </Link>
           </Menu.Item>
           <Menu.Item key="8">
-            <Link to="profile-info">
+            <Link to="create-admin">
               <span className="text-gray-600 hover:text-custom-blue">
-                Crate Admin
+                Create Admin
               </span>
             </Link>
           </Menu.Item>

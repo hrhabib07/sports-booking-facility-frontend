@@ -6,7 +6,7 @@ import { verifyToken } from "../../../utils/verifyToken";
 
 const Navbar = () => {
   const auth = useAppSelector((state) => state.auth);
-  const verifiedToken = verifyToken(auth?.token);
+  const verifiedToken = verifyToken(auth?.token as string);
   const userRole = verifiedToken?.role;
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

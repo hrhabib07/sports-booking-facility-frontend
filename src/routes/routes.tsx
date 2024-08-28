@@ -9,16 +9,18 @@ import PrivateRoute from "../auth/PrivateRoute";
 import BookingConfirmationPage from "../pages/BookingConfirmationPage";
 import SuccessfulBooking from "../pages/SuccessfulBooking";
 import MyBookings from "../components/ui/MyBookings/MyBookings";
-import UserDashboard from "../components/ui/Dashboard/UserDashboard";
-import ProfileInfo from "../components/ui/Dashboard/ProfileInfo/ProfileInfo";
-import DashBoardHome from "../components/ui/Dashboard/DashBoardHome/DashBoardHome";
+import UserDashboard from "../components/ui/Dashboard/userDashboard/UserDashboard";
+import ProfileInfo from "../components/ui/Dashboard/shared/ProfileInfo/ProfileInfo";
+import DashBoardHome from "../components/ui/Dashboard/shared/DashBoardHome/DashBoardHome";
 import FacilityListPage from "../pages/FacilityListPage";
 import FacilityDetailsPage from "../pages/FacilityDetailsPage";
 import ErrorPage from "../pages/ErrorPage";
 import RoleBasedRoute from "../auth/RoleBasedRoute";
-import AdminDashboard from "../components/ui/Dashboard/AdminDashboard";
-import AllBooking from "../components/ui/Dashboard/AllBooking";
-import AdminBookingDetails from "../components/ui/AdminBookingDetails";
+import AdminDashboard from "../components/ui/Dashboard/adminDashboard/AdminDashboard";
+import AllBooking from "../components/ui/Dashboard/adminDashboard/AllBooking";
+import AdminBookingDetails from "../components/ui/Dashboard/adminDashboard/AdminBookingDetails";
+import CreateFacility from "../components/ui/Dashboard/adminDashboard/CreateFacility";
+import CreateAdmin from "../components/ui/Dashboard/adminDashboard/CreateAdmin";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +88,14 @@ const router = createBrowserRouter([
           {
             path: "all-booking",
             element: <AllBooking />,
+          },
+          {
+            path: "create-facility",
+            element: <CreateFacility />,
+          },
+          {
+            path: "create-admin",
+            element: <CreateAdmin />,
           },
           {
             path: "profile-info",

@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../../redux/hooks";
 // import { TUserData } from "../../../../types/auth.type";
 import { Card, Typography } from "antd";
 

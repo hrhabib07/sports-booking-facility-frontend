@@ -23,6 +23,7 @@ const adminBookingApi = baseApi.injectEndpoints({
       }),
       //   providesTags: ["my-booking"],
     }),
+
     // getAvailableBooking: builder.query({
     //   query: (args) => ({
     //     url: `/check-availability?date=${args.date}&facility=${args.facility}`,

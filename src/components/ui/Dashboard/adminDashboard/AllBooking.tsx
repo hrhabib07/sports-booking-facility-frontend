@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table, Button } from "antd"; // Import necessary Ant Design components
 
-import { convertDateToCustomFormat } from "../../../utils/dateConversion";
-import { convertTo12HourFormat } from "../../../utils/timeConversion";
-import { useGetAllBookingsQuery } from "../../../redux/booking/adminBookingApi";
+import { convertDateToCustomFormat } from "../../../../utils/dateConversion";
+import { convertTo12HourFormat } from "../../../../utils/timeConversion";
+import { useGetAllBookingsQuery } from "../../../../redux/booking/adminBookingApi";
 import { Link } from "react-router-dom";
 
 // Define the type for the booking data

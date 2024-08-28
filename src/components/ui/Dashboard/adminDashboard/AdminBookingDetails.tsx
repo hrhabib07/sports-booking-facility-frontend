@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import {
   useDeleteBookingAdminMutation,
   useGetSingleBookingQuery,
-} from "../../redux/booking/adminBookingApi";
+} from "../../../../redux/booking/adminBookingApi";
 import { Button, Card, Descriptions, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";

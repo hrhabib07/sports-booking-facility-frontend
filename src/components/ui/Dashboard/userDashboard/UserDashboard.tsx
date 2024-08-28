@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../redux/hooks";
-import { logout } from "../../../redux/auth/authSlice";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { logout } from "../../../../redux/auth/authSlice";
 import { toast } from "sonner";
 import { Menu, Layout } from "antd";
 

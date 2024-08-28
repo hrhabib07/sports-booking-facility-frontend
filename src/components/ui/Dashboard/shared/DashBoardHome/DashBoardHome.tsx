@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../../../redux/hooks";
+import { useAppSelector } from "../../../../../redux/hooks";
 import { Card, Typography, Button } from "antd";
-import { verifyToken } from "../../../../utils/verifyToken";
+import { verifyToken } from "../../../../../utils/verifyToken";
 
 const { Title, Paragraph } = Typography;
 
@@ -11,7 +11,7 @@ const DashBoardHome = () => {
     name: string;
   } | null;
 
-  const verifiedToken = verifyToken(auth?.token);
+  const verifiedToken = verifyToken(auth?.token as string);
   const userRole = verifiedToken?.role;
 
   return (
