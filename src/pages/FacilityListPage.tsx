@@ -99,7 +99,7 @@ const FacilityListPage = () => {
               <p className="text-blue-600 font-semibold mb-4">
                 ${facility.pricePerHour} / hour
               </p>
-              {userRole === "user" && (
+              {userRole !== "admin" && (
                 <Link to={`/facility-details/${facility._id}`}>
                   <Button type="primary">View Details</Button>
                 </Link>

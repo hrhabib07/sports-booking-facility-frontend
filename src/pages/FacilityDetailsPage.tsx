@@ -1,6 +1,9 @@
 import { Button, Modal } from "antd";
-import { Link, useLocation } from "react-router-dom";
-import { useGetSingleFacilityQuery } from "../redux/facilities/facilitiesApi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  useDeleteFacilityMutation,
+  useGetSingleFacilityQuery,
+} from "../redux/facilities/facilitiesApi";
 import { useAppSelector } from "../redux/hooks";
 import { verifyToken } from "../utils/verifyToken";
 import { useState } from "react";
@@ -8,13 +11,18 @@ import { useState } from "react";
 const FacilityDetailsPage = () => {
   const location = useLocation();
   const facilityId = location.pathname.split("/")[2];
+  const navigate = useNavigate();
   const { data } = useGetSingleFacilityQuery(facilityId);
   const facilityData = data?.data;
   const auth = useAppSelector((state) => state.auth);
   const verifiedToken = verifyToken(auth?.token as string);
   const userRole = verifiedToken?.role;
 
+  const [deleteFacility, { data: deletedFacilityData, error }] =
+    useDeleteFacilityMutation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log("data", deletedFacilityData);
+  console.log("ERROR: ", error);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -22,6 +30,8 @@ const FacilityDetailsPage = () => {
 
   const handleOk = () => {
     setIsModalOpen(false);
+    deleteFacility(facilityId);
+    navigate("/admin-dashboard");
   };
 
   const handleCancel = () => {
@@ -53,7 +63,7 @@ const FacilityDetailsPage = () => {
             <p className="text-gray-600">{facilityData?.description}</p>
           </div>
           {/* Book Now Button */}
-          {userRole === "user" && (
+          {userRole !== "admin" && (
             <Link to={"/booking"} state={{ facilityId }}>
               <Button
                 type="primary"
@@ -66,7 +76,10 @@ const FacilityDetailsPage = () => {
           )}
           {userRole === "admin" && (
             <div>
-              <Link to={""} state={{ facilityId }}>
+              <Link
+                to={`/admin-dashboard/update-facility/${facilityId}`}
+                // state={{ facilityId }}
+              >
                 <Button
                   type="primary"
                   size="large"
@@ -75,17 +88,17 @@ const FacilityDetailsPage = () => {
                   Update Facility
                 </Button>
               </Link>
-              <Link to={""} state={{ facilityId }}>
-                <Button
-                  type="primary"
-                  danger
-                  size="large"
-                  onClick={showModal}
-                  className="mt-6 w-full lg:w-auto"
-                >
-                  Delete Facility
-                </Button>
-              </Link>
+
+              <Button
+                type="primary"
+                danger
+                size="large"
+                onClick={showModal}
+                className="mt-6 w-full lg:w-auto"
+              >
+                Delete Facility
+              </Button>
+
               <Modal
                 title="Basic Modal"
                 open={isModalOpen}

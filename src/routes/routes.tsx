@@ -21,6 +21,7 @@ import AllBooking from "../components/ui/Dashboard/adminDashboard/AllBooking";
 import AdminBookingDetails from "../components/ui/Dashboard/adminDashboard/AdminBookingDetails";
 import CreateFacility from "../components/ui/Dashboard/adminDashboard/CreateFacility";
 import CreateAdmin from "../components/ui/Dashboard/adminDashboard/CreateAdmin";
+import UpdateFacility from "../components/ui/Dashboard/adminDashboard/updateFacility";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
           {
             path: ":id",
             element: <FacilityDetailsPage />,
+          },
+          {
+            path: "update-facility/:id",
+            element: <UpdateFacility />,
           },
           {
             path: "booking-details/:bookingId",

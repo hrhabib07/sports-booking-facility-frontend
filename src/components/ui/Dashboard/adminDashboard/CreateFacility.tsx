@@ -34,9 +34,15 @@ const CreateFacility = () => {
     }
   };
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100">
       <Toaster />
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 ">
+      <h1 className="text-2xl font-bold text-custom-blue mb-6">
+        Create a New Facility
+      </h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 w-full max-w-lg bg-white p-6 rounded-lg shadow-md"
+      >
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label htmlFor="name">Name</label>
@@ -78,15 +84,6 @@ const CreateFacility = () => {
           </div>
 
           <div className="col-span-2 flex flex-col">
-            <label htmlFor="address">Address</label>
-            <input
-              id="address"
-              className="border bg-gray-50 p-2 rounded-md "
-              type="text"
-              {...register("address")}
-            />
-          </div>
-          <div className="col-span-2 flex flex-col">
             <label htmlFor="img">Image Url from imageBB</label>
             <small className="text-red-500">
               Please provide a valid url otherwise it will not show on the
@@ -102,7 +99,7 @@ const CreateFacility = () => {
         </div>
 
         <button className="p-2 bg-custom-blue text-white rounded-md">
-          Register
+          Create Facility{" "}
         </button>
       </form>
     </div>

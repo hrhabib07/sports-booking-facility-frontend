@@ -32,9 +32,13 @@ const CreateAdmin = () => {
     }
   };
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100">
       <Toaster />
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 ">
+      <h1 className="text-2xl font-bold text-custom-blue mb-6">Create Admin</h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 w-full max-w-lg bg-white p-6 rounded-lg shadow-md"
+      >
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label htmlFor="name">Name</label>
