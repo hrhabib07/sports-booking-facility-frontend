@@ -32,18 +32,17 @@ const Navbar = () => {
               Home
             </li>
           </Link>
-          {userRole === "user" && (
-            <Link to="/booking">
-              <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
-                Booking
-              </li>
-            </Link>
-          )}
           <Link to="/facility-list">
             <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
-              All Facility
+              Facilities
             </li>
           </Link>
+          <Link to="/about-us">
+            <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+              About
+            </li>
+          </Link>
+
           <Link to="/contact">
             <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
               Contact

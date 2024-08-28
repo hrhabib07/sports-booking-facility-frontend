@@ -112,32 +112,44 @@ const BookingPage = () => {
         availableSlot.endTime === slot.endTime
     )
   );
+
+  // Filter slots if today is selected to disable past time slots
+  const filteredSlotsWithTimeCheck = filteredSlots.filter((slot) => {
+    if (selectedDate === dayjs().format("YYYY-MM-DD")) {
+      const currentTime = dayjs().format("HH:mm");
+      return slot.startTime >= currentTime;
+    }
+    return true;
+  });
+
   const handleSelectSlot = (slot: { startTime: string; endTime: string }) => {
     setSelectedSlot(slot);
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-      <div className="flex flex-col gap-4">
-        <Space>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+      <div className="flex flex-col gap-6">
+        <Space direction="vertical" className="w-full">
           <div className="flex flex-col">
-            <label htmlFor="facility">Indoor stadium name</label>
+            <label htmlFor="facility" className="text-lg font-medium">
+              Select Facility
+            </label>
             <Select
               id="facility"
               value={selectedFacility}
-              className="w-80"
+              className="w-full"
               onChange={handleChangeFacility}
               options={facilitiesOptions}
               disabled={!!previousSelectedDate && !!previousSelectedFacility}
             />
           </div>
-        </Space>
-        <Space>
           <div className="flex flex-col">
-            <label htmlFor="date">Pick a date</label>
+            <label htmlFor="date" className="text-lg font-medium">
+              Select Date
+            </label>
             <DatePicker
               id="date"
-              className="w-80"
+              className="w-full"
               value={selectedDate ? dayjs(selectedDate) : null}
               onChange={onChangeDate}
               disabledDate={disabledDate}
@@ -148,10 +160,10 @@ const BookingPage = () => {
       </div>
       <div className="p-4">
         {availableSlots.length ? (
-          <p className="my-2"> Please select a Slot </p>
+          <p className="my-2 text-lg font-medium">Please select a time slot:</p>
         ) : (
-          <p className="text-red-400 my-2">
-            Please select a date and a name of indoor stadium first
+          <p className="text-red-400 my-2 text-lg font-medium">
+            Please select a facility and date first.
           </p>
         )}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -169,9 +181,9 @@ const BookingPage = () => {
               <Button
                 type={selectedSlot === slot ? "primary" : "default"}
                 onClick={() => handleSelectSlot(slot)}
-                className="text-center p-4 text-custom-blue"
+                className="text-center p-4"
                 disabled={
-                  !filteredSlots.some(
+                  !filteredSlotsWithTimeCheck.some(
                     (filteredSlot) =>
                       filteredSlot.startTime === slot.startTime &&
                       filteredSlot.endTime === slot.endTime
