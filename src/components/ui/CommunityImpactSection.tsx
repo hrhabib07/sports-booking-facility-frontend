@@ -1,18 +1,18 @@
 import { Card, Typography } from "antd";
 
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 
 const CommunityImpactSection = () => {
   return (
     <div className="bg-blue-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <Title level={2} className="text-custom-blue">
+        <h2 className="text-custom-blue text-3xl font-bold">
           Our Commitment to Community
-        </Title>
-        <Paragraph className="mt-4 text-lg text-gray-600">
+        </h2>
+        <p className="mt-4 text-lg text-gray-600">
           Discover how booking with us supports local communities and promotes
           sustainability.
-        </Paragraph>
+        </p>
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <Card bordered={false} className="bg-white p-6 shadow-md">
