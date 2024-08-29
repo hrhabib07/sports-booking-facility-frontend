@@ -43,14 +43,14 @@ const UserDashboard = () => {
           defaultSelectedKeys={["1"]}
           className="h-full border-r-0"
         >
-          <Menu.Item key="4">
+          <Menu.Item key="1">
             <Link to="">
               <span className="text-gray-600 hover:text-custom-blue">
                 Dashboard
               </span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="1">
+          <Menu.Item key="4">
             <Link to="my-booking">
               <span className="text-gray-600 hover:text-custom-blue">
                 My Booking
