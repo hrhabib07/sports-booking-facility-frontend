@@ -40,6 +40,11 @@ const FeaturedFacilities = () => {
           </p>
         </div>
         <div className="grid p-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredFacilities.length < 1 && (
+            <>
+              <h2 className="animate-pulse">Loading dta from backend . . . </h2>
+            </>
+          )}
           {featuredFacilities.map(
             (facility: {
               id: Key | null | undefined;

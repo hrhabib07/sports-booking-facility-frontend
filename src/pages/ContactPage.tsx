@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Input } from "antd";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { toast, Toaster } from "sonner";
 import { useNavigate } from "react-router-dom";
 
@@ -13,17 +12,24 @@ const ContactPage = () => {
     toast.success("Your message has been submitted successfully");
     console.log("Received values of form: ", values);
     form.resetFields();
-    // navigate("/");
-    // Delay navigation to allow toast to be visible
     setTimeout(() => {
-      // form.resetFields();
       navigate("/");
-    }, 1000); // Adjust the timeout duration as needed
+    }, 1000);
+  };
+
+  const mapContainerStyle = {
+    height: "300px",
+    width: "100%",
+  };
+
+  const center = {
+    lat: 51.505,
+    lng: -0.09,
   };
 
   return (
     <div className="p-6 bg-white min-h-screen">
-      <Toaster></Toaster>
+      <Toaster />
       <h2 className="text-2xl font-bold text-center mb-6">Contact Us</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Contact Form */}
@@ -90,21 +96,16 @@ const ContactPage = () => {
             </p>
           </div>
 
-          {/* Map Integration */}
-          <MapContainer
-            center={[51.505, -0.09]}
-            zoom={13}
-            scrollWheelZoom={false}
-            style={{ height: "300px", width: "100%" }}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution={`&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`}
-            />
-            <Marker position={[51.505, -0.09]}>
-              <Popup>Our Office Location</Popup>
-            </Marker>
-          </MapContainer>
+          {/* Google Map Integration */}
+          <LoadScript googleMapsApiKey="AIzaSyA0NjeVi4tX27IWkSbTRTJNtGQ_5BXnEW0">
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={center}
+              zoom={13}
+            >
+              <Marker position={center} />
+            </GoogleMap>
+          </LoadScript>
         </div>
       </div>
     </div>

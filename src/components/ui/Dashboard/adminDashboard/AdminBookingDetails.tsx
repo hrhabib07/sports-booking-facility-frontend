@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, useLocation } from "react-router-dom";
 import {
   useDeleteBookingAdminMutation,
@@ -5,7 +6,6 @@ import {
 } from "../../../../redux/booking/adminBookingApi";
 import { Button, Card, Descriptions, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
 
 const { confirm } = Modal;
 
@@ -15,8 +15,6 @@ const AdminBookingDetails = () => {
 
   const { data, isLoading, error } = useGetSingleBookingQuery(bookingId);
   const [deleteBookingAdmin] = useDeleteBookingAdminMutation();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   if (isLoading) {
     return <p>Loading booking details...</p>;
@@ -33,7 +31,6 @@ const AdminBookingDetails = () => {
       content: "This action cannot be undone.",
       onOk() {
         deleteBookingAdmin(bookingId);
-        setIsModalVisible(false);
       },
     });
   };

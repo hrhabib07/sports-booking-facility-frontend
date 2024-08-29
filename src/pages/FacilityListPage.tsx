@@ -52,6 +52,11 @@ const FacilityListPage = () => {
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredFacilities.length < 1 && (
+          <>
+            <h2 className="animate-pulse">Loading dta from backend . . . </h2>
+          </>
+        )}
         {filteredFacilities.map(
           (facility: {
             _id: Key | null | undefined;

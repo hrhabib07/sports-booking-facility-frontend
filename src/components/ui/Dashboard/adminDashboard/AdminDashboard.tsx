@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link, Outlet } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { logout } from "../../../../redux/auth/authSlice";
 import { Menu, Layout, Modal } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
+// import { useState } from "react";
 
 const { Sider, Content } = Layout;
 const { confirm } = Modal;
@@ -12,7 +13,8 @@ const UserDashboard = () => {
   const dispatch = useAppDispatch();
   // const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showLogoutConfirm = () => {
     confirm({
@@ -27,7 +29,7 @@ const UserDashboard = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    setIsModalVisible(false);
+    // setIsModalVisible(false);
   };
 
   return (
