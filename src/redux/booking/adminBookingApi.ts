@@ -7,21 +7,21 @@ const adminBookingApi = baseApi.injectEndpoints({
         url: "/bookings",
         method: "GET",
       }),
-      //   providesTags: ["my-booking"],
+      providesTags: ["my-booking"],
     }),
     getSingleBooking: builder.query({
       query: (id) => ({
         url: `/bookings/${id}`,
         method: "GET",
       }),
-      //   providesTags: ["my-booking"],
+      providesTags: ["my-booking"],
     }),
     deleteBookingAdmin: builder.mutation({
       query: (id) => ({
         url: `/bookings/admin/${id}`,
         method: "DELETE",
       }),
-      //   providesTags: ["my-booking"],
+      invalidatesTags: ["my-booking"],
     }),
 
     // getAvailableBooking: builder.query({
