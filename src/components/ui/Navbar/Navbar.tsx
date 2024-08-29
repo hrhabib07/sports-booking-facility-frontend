@@ -19,11 +19,13 @@ const Navbar = () => {
     <div className="bg-blue-50">
       <div className="h-16 flex justify-between items-center px-4 md:px-8">
         <div className="flex items-center">
-          <img
-            src="https://i.ibb.co/0KCLL9m/sport-Line-without-bg.png"
-            alt="Logo"
-            style={{ width: "50px", height: "50px" }}
-          />
+          <Link to={"/"}>
+            <img
+              src="https://i.ibb.co/0KCLL9m/sport-Line-without-bg.png"
+              alt="Logo"
+              style={{ width: "50px", height: "50px" }}
+            />
+          </Link>
         </div>
 
         <div className="hidden md:flex gap-4 list-none">

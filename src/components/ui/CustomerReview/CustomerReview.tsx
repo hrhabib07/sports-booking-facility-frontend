@@ -29,11 +29,11 @@ const customerReviews = [
 
 const CustomerReview = () => {
   return (
-    <div className="py-12 bg-blue-200">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="py-12">
+      <h2 className="text-3xl font-bold text-center text-custom-blue mb-8">
         Customer Testimonials
       </h2>
-      <Carousel autoplay arrows infinite={false}>
+      <Carousel autoplay={true} autoplaySpeed={3000}>
         {customerReviews.map((review, index) => (
           <div
             key={index}
