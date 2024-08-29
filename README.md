@@ -1,50 +1,26 @@
-# React + TypeScript + Vite
+# Sports Facility Booking Platform - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend module of the Sports Facility Booking Platform, built with React, TypeScript, Tailwind CSS, and Ant Design. The frontend interfaces seamlessly with the backend API to deliver a user-friendly experience for booking sports facilities.
 
-Currently, two official plugins are available:
+## Project Information
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Completion Date**: August 29, 2024
 
-## Expanding the ESLint configuration
+## Key Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Landing Page**: Gateway to the platform with a clean design and key sections like Hero, Featured Facilities, and Testimonials.
+- **User Dashboard**: Manage bookings, view details, and cancel if needed.
+- **Admin Dashboard**: Manage facilities, bookings, and users with CRUD operations.
+- **Facility Management**: Search, filter, and view details of sports facilities. Supports CRUD operations for admin.
+- **Booking System**: Real-time availability check, booking form, and payment integration.
+- **Responsive Design**: Fully responsive across mobile, tablet, and desktop devices.
+- **Error Handling**: Custom error pages and Toast notifications for API failures.
+- **Pagination and Scroll to Top**: Enhanced navigation and user experience.
 
-- Configure the top-level `parserOptions` property like this:
+## Live site link
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+[Sports booking facilities live](https://sport-booking-facility-fronted.vercel.app/)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🔗 Links
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mdhabibur-hr7/)
