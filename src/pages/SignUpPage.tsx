@@ -33,9 +33,15 @@ const SignUpPage = () => {
     }
   };
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex flex-col justify-center items-center bg-gray-100">
       <Toaster />
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 ">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 w-full max-w-lg bg-white p-6 rounded-lg shadow-md"
+      >
+        <h2 className="text-2xl font-semibold text-center text-custom-blue mb-4">
+          Register A New Account
+        </h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label htmlFor="name">Name</label>
@@ -60,7 +66,7 @@ const SignUpPage = () => {
             <input
               id="password"
               className="border bg-gray-50 p-2 rounded-md "
-              type="text"
+              type="password"
               {...register("password")}
             />
           </div>
@@ -85,7 +91,7 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        <Link className="text-custom-blue" to={"/login"}>
+        <Link className="text-custom-blue hover:underline" to={"/login"}>
           already have account?{" "}
         </Link>
         <button className="p-2 bg-custom-blue text-white rounded-md">

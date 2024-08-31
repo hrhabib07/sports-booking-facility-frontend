@@ -6,16 +6,17 @@ import { useConfirmBookingMutation } from "../redux/booking/userBookingApi";
 import { toast, Toaster } from "sonner";
 
 const BookingConfirmationPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const location = useLocation();
   const { selectedDate, selectedFacility, startTime, endTime } =
     location.state || {};
 
   const { data } = useGetSingleFacilityQuery(selectedFacility);
-  const [confirmBooking] = useConfirmBookingMutation();
+  const [confirmBooking, { data: bookingConfirmationData }] =
+    useConfirmBookingMutation();
   // console.log("error", error);
-  // console.log("bookingConfirmationData", bookingConfirmationData);
+  console.log("bookingConfirmationData", bookingConfirmationData);
 
   const handleBookingConfirmation = async () => {
     try {
@@ -24,36 +25,27 @@ const BookingConfirmationPage = () => {
         date: selectedDate,
         startTime,
         endTime,
+        transactionId: "abcd",
+        paymentStatus: "pending",
+        isBooked: "unconfirmed",
       };
+      // console.log(bookingData);
       const result = await confirmBooking(bookingData).unwrap();
-      console.log("result", result);
-      console.log("bookingId", result?.data?._id);
+      window.location.href = result.data.payment_url;
+      // console.log("result", result);
+      // console.log("bookingId", result?.data?._id);
       toast.success("Your booking is successful.");
-      navigate("/successful-booking", {
-        state: { bookingId: result?.data?._id },
-      });
+
+      // if (result.data) {
+      //   navigate("/successful-booking", {
+      //     state: { bookingId: result?.data?._id },
+      //   });
+      // }
     } catch (err) {
       toast.error("Something went wrong");
       console.error(err);
     }
   };
-
-  // const handleBookingConfirmation = () => {
-  //   const bookingData = {
-  //     facility: selectedFacility,
-  //     date: selectedDate,
-  //     startTime,
-  //     endTime,
-  //   };
-  //   confirmBooking(bookingData);
-  //   if (error) {
-  //     toast.error("something went wrong ");
-  //     console.log(error);
-  //   } else {
-  //     toast.success("Your booking is successful.");
-  //     navigate("/successful-booking", { state: { bookingId: data._id } });
-  //   }
-  // };
 
   const facilityDetails = data?.data;
   return (

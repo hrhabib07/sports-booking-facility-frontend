@@ -104,7 +104,7 @@ const Navbar = () => {
                 </li>
               </Link>
             )}
-            <Link to="/facility-list">
+            <Link to="/facility-list" onClick={toggleMobileMenu}>
               <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
                 All Facility
               </li>
@@ -122,11 +122,21 @@ const Navbar = () => {
                 </li>
               </Link>
             ) : (
-              <Link to={"/user-dashboard"} onClick={toggleMobileMenu}>
-                <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
-                  Dashboard
-                </li>
-              </Link>
+              <div>
+                {userRole === "user" ? (
+                  <Link to={"/user-dashboard"} onClick={toggleMobileMenu}>
+                    <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                      Dashboard
+                    </li>
+                  </Link>
+                ) : (
+                  <Link to={"/admin-dashboard"} onClick={toggleMobileMenu}>
+                    <li className="cursor-pointer hover:bg-white p-4 text-gray-500 hover:text-custom-blue border-b-2 border-transparent hover:border-custom-blue">
+                      Dashboard
+                    </li>
+                  </Link>
+                )}
+              </div>
             )}
           </ul>
         </div>
