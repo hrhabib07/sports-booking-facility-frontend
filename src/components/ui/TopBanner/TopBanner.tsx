@@ -13,36 +13,38 @@ const TopBanner = () => {
 
   return (
     <div className="bg-blue-50 w-full">
-      <div className="h-auto md:h-[500px] flex flex-col-reverse md:flex-row gap-4 justify-between items-center">
-        <div className="flex-1 flex w-full flex-col justify-center items-center">
-          <div className="mx-4">
-            <h2 className="text-4xl text-custom-blue my-2">
-              Welcome to sportLine
-            </h2>
-            <p className="text-gray-500 text-xl my-2">
-              The ultimate solution for booking sports facilities <br /> in the
-              simplest way
-            </p>
-            <Link to={"/booking"}>
-              <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
-                Book Now
-              </button>
-            </Link>
+      <div className="md:max-w-7xl mx-auto">
+        <div className="h-auto md:h-[500px] flex flex-col-reverse md:flex-row gap-4 justify-between items-center">
+          <div className="flex-1 flex w-full flex-col justify-center items-center">
+            <div className="mx-4">
+              <h2 className="text-4xl text-custom-blue my-2">
+                Welcome to sportLine
+              </h2>
+              <p className="text-gray-500 text-xl my-2">
+                The ultimate solution for booking sports facilities <br /> in
+                the simplest way
+              </p>
+              <Link to={"/booking"}>
+                <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
+                  Book Now
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="flex-1 flex justify-center items-center h-80 w-80">
-          <div className="w-80">
-            <Carousel autoplay={true} fade={true} autoplaySpeed={1000}>
-              {images.map((src, index) => (
-                <div key={index}>
-                  <img
-                    src={src}
-                    alt={`Slide ${index + 1}`}
-                    className="w-80 h-80 object-cover rounded-md"
-                  />
-                </div>
-              ))}
-            </Carousel>
+          <div className="flex-1 flex justify-center items-center h-80 w-80">
+            <div className="w-80">
+              <Carousel autoplay={true} fade={true} autoplaySpeed={1000}>
+                {images.map((src, index) => (
+                  <div key={index}>
+                    <img
+                      src={src}
+                      alt={`Slide ${index + 1}`}
+                      className="w-80 h-80 object-cover rounded-md"
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
           </div>
         </div>
       </div>
