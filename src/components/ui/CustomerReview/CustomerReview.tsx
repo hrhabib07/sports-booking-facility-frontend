@@ -29,30 +29,32 @@ const customerReviews = [
 
 const CustomerReview = () => {
   return (
-    <div className="py-12">
-      <h2 className="text-3xl font-bold text-center text-custom-blue mb-8">
-        Customer Testimonials
-      </h2>
-      <Carousel autoplay={true} autoplaySpeed={3000}>
-        {customerReviews.map((review, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center p-8"
-          >
-            <div>
-              <Rate disabled defaultValue={review.rating} className="mb-4" />
+    <div className="md:max-w-7xl mx-auto">
+      <div className="py-12">
+        <h2 className="text-3xl font-bold text-center text-custom-blue mb-8 ">
+          Customer Testimonials
+        </h2>
+        <Carousel autoplay={true} autoplaySpeed={3000}>
+          {customerReviews.map((review, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center p-8 "
+            >
+              <div>
+                <Rate disabled defaultValue={review.rating} className="mb-4" />
+              </div>
+              <div>
+                <Text className="text-lg text-gray-600 italic">{`"${review.review}"`}</Text>
+              </div>
+              <div>
+                <Text className="mt-4 font-semibold text-gray-800">
+                  {review.name}
+                </Text>
+              </div>
             </div>
-            <div>
-              <Text className="text-lg text-gray-600 italic">{`"${review.review}"`}</Text>
-            </div>
-            <div>
-              <Text className="mt-4 font-semibold text-gray-800">
-                {review.name}
-              </Text>
-            </div>
-          </div>
-        ))}
-      </Carousel>
+          ))}
+        </Carousel>
+      </div>
     </div>
   );
 };
