@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button, Modal, Carousel, Rate, Typography } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   useDeleteFacilityMutation,
@@ -8,6 +8,65 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useAppSelector } from "../redux/hooks";
 import { verifyToken } from "../utils/verifyToken";
 import { useState } from "react";
+
+const { Text } = Typography;
+
+const customerReviews = [
+  {
+    name: "John Doe",
+    review:
+      "Booking was seamless and the facility was top-notch. Highly recommend!",
+    rating: 5,
+  },
+  {
+    name: "Jane Smith",
+    review:
+      "Great experience! The booking process was easy and the staff was very helpful.",
+    rating: 4,
+  },
+  {
+    name: "Mark Wilson",
+    review: "The facility was clean and well-maintained. Will book again.",
+    rating: 5,
+  },
+  {
+    name: "Emily Johnson",
+    review: "Good value for money. The booking system is user-friendly.",
+    rating: 4,
+  },
+];
+
+const CustomerReview = () => {
+  return (
+    <div className="md:max-w-7xl mx-auto">
+      <div className=" bg-gray-50 py-4 rounded-lg">
+        <h2 className="text-xl font-bold text-center text-custom-blue">
+          Reviews
+        </h2>
+        <Carousel autoplay={true} autoplaySpeed={3000}>
+          {customerReviews.map((review, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center text-center p-8"
+            >
+              <div>
+                <Rate disabled defaultValue={review.rating} className="mb-4" />
+              </div>
+              <div>
+                <Text className="text-lg text-gray-600 italic">{`"${review.review}"`}</Text>
+              </div>
+              <div>
+                <Text className="mt-4 font-semibold text-gray-800">
+                  {review.name}
+                </Text>
+              </div>
+            </div>
+          ))}
+        </Carousel>
+      </div>
+    </div>
+  );
+};
 
 const FacilityDetailsPage = () => {
   const location = useLocation();
@@ -130,32 +189,17 @@ const FacilityDetailsPage = () => {
           </ul>
         </div>
 
-        {/* Reviews Section */}
+        {/* Customer Reviews Section */}
         <div className="mt-8">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">Reviews</h3>
-          <div className="space-y-4">
-            <div className="p-4 bg-gray-100 rounded-lg">
-              <p className="text-gray-800 font-semibold">John Doe</p>
-              <p className="text-gray-600">
-                "Excellent space with all necessary amenities!"
-              </p>
-            </div>
-            <div className="p-4 bg-gray-100 rounded-lg">
-              <p className="text-gray-800 font-semibold">Jane Smith</p>
-              <p className="text-gray-600">
-                "The facility was clean and well-organized."
-              </p>
-            </div>
-          </div>
+          <CustomerReview />
         </div>
 
         {/* Location Section */}
-        <div className="mt-8 ">
+        <div className="mt-8">
           <h3 className="text-2xl font-semibold text-gray-800 mb-4">
             Location
           </h3>
-          <div className=" bg-gray-300 rounded-lg">
-            {/* Ideally, add a map component here */}
+          <div className="bg-gray-300 rounded-lg">
             <LoadScript googleMapsApiKey="AIzaSyA0NjeVi4tX27IWkSbTRTJNtGQ_5BXnEW0">
               <GoogleMap
                 mapContainerStyle={mapContainerStyle}
@@ -165,7 +209,6 @@ const FacilityDetailsPage = () => {
                 <Marker position={center} />
               </GoogleMap>
             </LoadScript>
-            {/* <p className="text-gray-600 text-center pt-24">Map Placeholder</p> */}
           </div>
         </div>
       </div>

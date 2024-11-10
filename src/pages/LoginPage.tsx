@@ -14,14 +14,24 @@ const LoginPage = () => {
   const from = location.state?.from?.pathname || "/";
   const slotData = location?.state?.from?.state || {};
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const [login, { error }] = useLoginMutation();
 
   if (error) {
     console.log(error);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // Prefill handlers for testing credentials
+  const handleTestUser = () => {
+    setValue("email", "user@test.com");
+    setValue("password", "user@test");
+  };
+
+  const handleTestAdmin = () => {
+    setValue("email", "admin@test.com");
+    setValue("password", "admin@test");
+  };
+
   const onSubmit = async (userData: any) => {
     const toastId = toast.loading("Logging in...");
     try {
@@ -61,12 +71,30 @@ const LoginPage = () => {
           Login to Your Account
         </h2>
 
+        {/* Prefill Buttons */}
+        <div className="flex justify-center gap-4 mb-4">
+          <button
+            type="button"
+            className="p-2 bg-white border border-custom-blue text-custom-blue rounded-md hover:bg-custom-blue hover:text-white"
+            onClick={handleTestUser}
+          >
+            Test User
+          </button>
+          <button
+            type="button"
+            className="p-2 bg-white border border-custom-blue text-custom-blue rounded-md hover:bg-custom-blue hover:text-white"
+            onClick={handleTestAdmin}
+          >
+            Test Admin
+          </button>
+        </div>
+
         <div className="grid grid-cols-1 gap-4">
           <div className="flex flex-col">
             <label htmlFor="email">Email</label>
             <input
               id="email"
-              className="border bg-gray-50 p-2 rounded-md "
+              className="border bg-gray-50 p-2 rounded-md"
               type="text"
               {...register("email")}
             />
@@ -75,7 +103,7 @@ const LoginPage = () => {
             <label htmlFor="password">Password</label>
             <input
               id="password"
-              className="border bg-gray-50 p-2 rounded-md "
+              className="border bg-gray-50 p-2 rounded-md"
               type="password"
               {...register("password")}
             />
