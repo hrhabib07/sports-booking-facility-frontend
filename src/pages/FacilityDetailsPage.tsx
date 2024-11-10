@@ -130,47 +130,49 @@ const FacilityDetailsPage = () => {
               </p>
               <p className="text-gray-600 mb-6">{facilityData?.description}</p>
             </div>
-            {userRole !== "admin" && (
-              <Link to={"/booking"} state={{ facilityId }}>
-                <Button
-                  type="primary"
-                  size="large"
-                  className="mt-4 w-full lg:w-auto"
-                >
-                  Book Now
-                </Button>
-              </Link>
-            )}
-            {userRole === "admin" && (
-              <div className="flex flex-col gap-4">
-                <Link to={`/admin-dashboard/update-facility/${facilityId}`}>
+            <div>
+              {userRole !== "admin" && (
+                <Link to={"/booking"} state={{ facilityId }}>
                   <Button
                     type="primary"
                     size="large"
-                    className="w-full lg:w-auto"
+                    className="mt-4 w-full lg:w-auto"
                   >
-                    Update Facility
+                    Book Now
                   </Button>
                 </Link>
-                <Button
-                  type="primary"
-                  danger
-                  size="large"
-                  onClick={showModal}
-                  className="w-full lg:w-auto"
-                >
-                  Delete Facility
-                </Button>
-                <Modal
-                  title="Confirm Deletion"
-                  open={isModalOpen}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <p>Are you sure you want to delete this facility?</p>
-                </Modal>
-              </div>
-            )}
+              )}
+              {userRole === "admin" && (
+                <div className="flex gap-4">
+                  <div>
+                    <Link to={`/admin-dashboard/update-facility/${facilityId}`}>
+                      <Button type="primary" size="large" className="">
+                        Update Facility
+                      </Button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Button
+                      type="primary"
+                      danger
+                      size="large"
+                      onClick={showModal}
+                      className=""
+                    >
+                      Delete Facility
+                    </Button>
+                    <Modal
+                      title="Confirm Deletion"
+                      open={isModalOpen}
+                      onOk={handleOk}
+                      onCancel={handleCancel}
+                    >
+                      <p>Are you sure you want to delete this facility?</p>
+                    </Modal>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

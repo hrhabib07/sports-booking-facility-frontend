@@ -23,6 +23,7 @@ import CreateFacility from "../components/ui/Dashboard/adminDashboard/CreateFaci
 import CreateAdmin from "../components/ui/Dashboard/adminDashboard/CreateAdmin";
 import UpdateFacility from "../components/ui/Dashboard/adminDashboard/updateFacility";
 import AboutUs from "../pages/AboutUsPage";
+import AdminFacilityList from "../components/ui/Dashboard/adminDashboard/AdminFacilityList";
 
 const router = createBrowserRouter([
   {
@@ -85,7 +86,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <FacilityListPage />,
+            element: <AdminFacilityList />,
           },
           {
             path: ":id",
