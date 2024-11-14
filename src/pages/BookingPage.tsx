@@ -127,75 +127,79 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
-      <div className="flex flex-col gap-6">
-        <Space direction="vertical" className="w-full">
-          <div className="flex flex-col">
-            <label htmlFor="facility" className="text-lg font-medium">
-              Select Facility
-            </label>
-            <Select
-              id="facility"
-              value={selectedFacility}
-              className="w-full"
-              onChange={handleChangeFacility}
-              options={facilitiesOptions}
-              disabled={!!previousSelectedDate && !!previousSelectedFacility}
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="date" className="text-lg font-medium">
-              Select Date
-            </label>
-            <DatePicker
-              id="date"
-              className="w-full"
-              value={selectedDate ? dayjs(selectedDate) : null}
-              onChange={onChangeDate}
-              disabledDate={disabledDate}
-              disabled={!!previousSelectedDate && !!previousSelectedFacility}
-            />
-          </div>
-        </Space>
-      </div>
-      <div className="p-4">
-        {availableSlots.length ? (
-          <p className="my-2 text-lg font-medium">Please select a time slot:</p>
-        ) : (
-          <p className="text-red-400 my-2 text-lg font-medium">
-            Please select a facility and date first.
-          </p>
-        )}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {allSlots.map((slot, index) => (
-            <Link
-              key={index}
-              to="/confirm-booking"
-              state={{
-                selectedDate,
-                selectedFacility,
-                startTime: slot.startTime,
-                endTime: slot.endTime,
-              }}
-            >
-              <Button
-                type={selectedSlot === slot ? "primary" : "default"}
-                onClick={() => handleSelectSlot(slot)}
-                className="text-center p-4"
-                disabled={
-                  !filteredSlotsWithTimeCheck.some(
-                    (filteredSlot) =>
-                      filteredSlot.startTime === slot.startTime &&
-                      filteredSlot.endTime === slot.endTime
-                  )
-                }
+    <div className="max-w-7xl mx-auto min-h-[calc(100vh-17rem)]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
+        <div className="flex flex-col gap-6">
+          <Space direction="vertical" className="w-full">
+            <div className="flex flex-col">
+              <label htmlFor="facility" className="text-lg font-medium">
+                Select Facility
+              </label>
+              <Select
+                id="facility"
+                value={selectedFacility}
+                className="w-full"
+                onChange={handleChangeFacility}
+                options={facilitiesOptions}
+                disabled={!!previousSelectedDate && !!previousSelectedFacility}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="date" className="text-lg font-medium">
+                Select Date
+              </label>
+              <DatePicker
+                id="date"
+                className="w-full"
+                value={selectedDate ? dayjs(selectedDate) : null}
+                onChange={onChangeDate}
+                disabledDate={disabledDate}
+                disabled={!!previousSelectedDate && !!previousSelectedFacility}
+              />
+            </div>
+          </Space>
+        </div>
+        <div className="p-4">
+          {availableSlots.length ? (
+            <p className="my-2 text-lg font-medium">
+              Please select a time slot:
+            </p>
+          ) : (
+            <p className="text-red-400 my-2 text-lg font-medium">
+              Please select a facility and date first.
+            </p>
+          )}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {allSlots.map((slot, index) => (
+              <Link
+                key={index}
+                to="/confirm-booking"
+                state={{
+                  selectedDate,
+                  selectedFacility,
+                  startTime: slot.startTime,
+                  endTime: slot.endTime,
+                }}
               >
-                {`${convertTo12HourFormat(
-                  slot.startTime
-                )} - ${convertTo12HourFormat(slot.endTime)}`}
-              </Button>
-            </Link>
-          ))}
+                <Button
+                  type={selectedSlot === slot ? "primary" : "default"}
+                  onClick={() => handleSelectSlot(slot)}
+                  className="text-center p-4"
+                  disabled={
+                    !filteredSlotsWithTimeCheck.some(
+                      (filteredSlot) =>
+                        filteredSlot.startTime === slot.startTime &&
+                        filteredSlot.endTime === slot.endTime
+                    )
+                  }
+                >
+                  {`${convertTo12HourFormat(
+                    slot.startTime
+                  )} - ${convertTo12HourFormat(slot.endTime)}`}
+                </Button>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

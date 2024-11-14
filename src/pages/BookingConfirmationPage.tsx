@@ -30,10 +30,10 @@ const BookingConfirmationPage = () => {
       window.location.href = result.data.payment_url; // Redirect to payment URL
 
       // Optional navigation after successful booking
-      toast.success("Your booking is successful.");
-      navigate("/successful-booking", {
-        state: { bookingId: result?.data?._id },
-      });
+      // toast.success("Your booking is successful.");
+      // navigate("/successful-booking", {
+      //   state: { bookingId: result?.data?._id },
+      // });
     } catch (err) {
       toast.error("Something went wrong");
       console.error(err);
