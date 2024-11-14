@@ -24,6 +24,7 @@ import CreateAdmin from "../components/ui/Dashboard/adminDashboard/CreateAdmin";
 import UpdateFacility from "../components/ui/Dashboard/adminDashboard/updateFacility";
 import AboutUs from "../pages/AboutUsPage";
 import AdminFacilityList from "../components/ui/Dashboard/adminDashboard/AdminFacilityList";
+import ErrorBooking from "../pages/ErrorBooking";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
         path: "",
         element: <HomePage />,
       },
+
       {
         path: "home",
         element: <HomePage />,
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "successful-booking",
         element: <SuccessfulBooking />,
+      },
+      {
+        path: "unsuccessful-booking",
+        element: <ErrorBooking />,
       },
       {
         path: "booking",
@@ -154,6 +160,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "*", // Catch-all route for undefined paths
     element: <ErrorPage />, // Display the ErrorPage for 404 errors
