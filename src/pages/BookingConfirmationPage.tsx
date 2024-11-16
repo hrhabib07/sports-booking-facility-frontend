@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Card, Button } from "antd";
 import { useGetSingleFacilityQuery } from "../redux/facilities/facilitiesApi";
 import { convertTo12HourFormat } from "../utils/timeConversion";
@@ -6,7 +6,6 @@ import { useConfirmBookingMutation } from "../redux/booking/userBookingApi";
 import { toast, Toaster } from "sonner";
 
 const BookingConfirmationPage = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { selectedDate, selectedFacility, startTime, endTime } =
     location.state || {};
