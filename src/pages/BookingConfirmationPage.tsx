@@ -26,7 +26,8 @@ const BookingConfirmationPage = () => {
       };
 
       const result = await confirmBooking(bookingData).unwrap();
-      window.location.href = result.data.payment_url; // Redirect to payment URL
+      console.log(result);
+      // window.location.href = result.data.payment_url; // Redirect to payment URL
 
       // Optional navigation after successful booking
       // toast.success("Your booking is successful.");
