@@ -9,33 +9,34 @@ const SuccessfulBooking = () => {
         <CheckCircleOutlined style={{ fontSize: "3rem", color: "#38a169" }} />
 
         <h1 className="text-4xl font-extrabold text-blue-600 mb-4 mt-4">
-          🎉 Congratulations!
+          🎉 Booking Confirmed!
         </h1>
         <p className="text-lg font-semibold text-gray-700 mb-2">
-          Your booking has been successfully confirmed.
+          Your booking has been successfully recorded.
         </p>
         <p className="text-base text-gray-500 mb-6">
-          Thank you for choosing our service. We look forward to serving you!
+          Thank you for reserving with us. Please note that payment will be
+          required before using the facility.
         </p>
 
         <div className="bg-blue-50 rounded-lg p-4 mb-8">
           <h2 className="text-lg font-semibold text-blue-600 mb-2">
-            Booking Details:
+            Booking Information:
           </h2>
           <p className="text-gray-600">
-            <strong>Transaction ID:</strong> 1234-5678-ABCD
-          </p>
-          <p className="text-gray-600">
-            <strong>Payment Amount:</strong> $500.00
+            <strong>Booking ID:</strong> 9876-5432-QWERTY
           </p>
           <p className="text-gray-600">
             <strong>Booking Date:</strong> {new Date().toLocaleDateString()}
           </p>
+          <p className="text-gray-600">
+            <strong>Payment Status:</strong> Pending
+          </p>
         </div>
 
         <div className="text-gray-600 italic mb-6">
-          If you have any questions or need assistance, please contact our
-          support team.
+          Please ensure payment is completed before your scheduled use. Contact
+          our support team for further assistance.
         </div>
 
         <div className="mt-6 flex justify-center gap-6">
@@ -52,7 +53,7 @@ const SuccessfulBooking = () => {
               className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:text-blue-500 hover:bg-white border border-blue-500 transition-all duration-300"
               style={{ maxWidth: "200px" }}
             >
-              Show Booking
+              View Booking
             </Button>
           </Link>
         </div>

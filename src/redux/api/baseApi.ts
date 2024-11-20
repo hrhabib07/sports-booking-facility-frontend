@@ -4,8 +4,8 @@ import { RootState } from "../store";
 // baseUrl: "https://sports-facility-booking-platform-rho.vercel.app/api/",
 // baseUrl: "http://localhost:5000/api/",
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/",
-  // baseUrl: "https://sports-facility-booking-platform-rho.vercel.app/api/",
+  // baseUrl: "http://localhost:5000/api/",
+  baseUrl: "https://sports-facility-booking-platform-rho.vercel.app/api/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
