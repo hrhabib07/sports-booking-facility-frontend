@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Card, Button } from "antd";
 import { useGetSingleFacilityQuery } from "../redux/facilities/facilitiesApi";
 import { convertTo12HourFormat } from "../utils/timeConversion";
@@ -12,6 +12,7 @@ const BookingConfirmationPage = () => {
 
   const { data, isLoading } = useGetSingleFacilityQuery(selectedFacility);
   const [confirmBooking] = useConfirmBookingMutation();
+  const navigate = useNavigate();
 
   const handleBookingConfirmation = async () => {
     try {
@@ -20,20 +21,14 @@ const BookingConfirmationPage = () => {
         date: selectedDate,
         startTime,
         endTime,
-        transactionId: "abcd",
-        paymentStatus: "pending",
-        isBooked: "unconfirmed",
       };
-
       const result = await confirmBooking(bookingData).unwrap();
-      console.log(result);
-      // window.location.href = result.data.payment_url; // Redirect to payment URL
-
-      // Optional navigation after successful booking
-      // toast.success("Your booking is successful.");
-      // navigate("/successful-booking", {
-      //   state: { bookingId: result?.data?._id },
-      // });
+      // console.log("result", result);
+      // console.log("bookingId", result?.data?._id);
+      toast.success("Your booking is successful.");
+      navigate("/successful-booking", {
+        state: { bookingId: result?.data?._id },
+      });
     } catch (err) {
       toast.error("Something went wrong");
       console.error(err);
@@ -42,7 +37,7 @@ const BookingConfirmationPage = () => {
 
   const facilityDetails = data?.data;
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-[calc(100vh-17rem)] bg-gray-100">
       <Card
         title="Confirm Your Booking"
         bordered={false}
