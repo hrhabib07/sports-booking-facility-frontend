@@ -1,7 +1,12 @@
 import { Carousel } from "antd";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hooks";
+import { verifyToken } from "../../../utils/verifyToken";
 
 const TopBanner = () => {
+  const auth = useAppSelector((state) => state.auth);
+  const verifiedToken = verifyToken(auth?.token as string);
+  const userRole = verifiedToken?.role;
   const images = [
     "https://images.pexels.com/photos/13558754/pexels-photo-13558754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "https://images.pexels.com/photos/13311973/pexels-photo-13311973.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -24,11 +29,20 @@ const TopBanner = () => {
                 The ultimate solution for booking sports facilities <br /> in
                 the simplest way
               </p>
-              <Link to={"/booking"}>
-                <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
-                  Book Now
-                </button>
-              </Link>
+              {userRole !== "admin" && (
+                <Link to={"/booking"}>
+                  <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
+                    Book Now
+                  </button>
+                </Link>
+              )}
+              {userRole === "admin" && (
+                <Link to={"/admin-dashboard"}>
+                  <button className="bg-custom-blue text-white p-2 my-2 rounded hover:text-custom-blue hover:bg-white border border-custom-blue">
+                    Dashboard
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
           <div className="flex-1 flex justify-center items-center h-80 w-80">
